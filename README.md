@@ -64,50 +64,49 @@ The OpenWeatherMap Dashboard is a comprehensive Python application designed to f
 ---
 
 ## **COMPLETE PROJECT DETAILS**
-PROJECT STRUCTURE**
+
+**Project Structure**
 
 ```
 Task-1/
 ├── main.py              (297 lines) - CLI orchestrator
-├── api.py               (140 lines) - API client & fallback handler
-├── extract.py           (163 lines) - Data transformation engine
-├── dashboard.py         (341 lines) - Visualization generation
+├── api.py               (140 lines) - API & fallback handler
+├── extract.py           (163 lines) - Data transformation
+├── dashboard.py         (341 lines) - Visualization
 ├── requirements.txt     - Dependencies
-├── .env                 - API key configuration
-└── .gitignore          - Git exclusions
+└── .env                 - API configuration
 ```
 
-**Total Production Code**: 941 lines across 4 Python modules
+**Total Code**: 941 lines across 4 Python modules
 
 ---
 
 ## **CODE MODULES EXPLANATION**
 
-**api.py** - Fetches 5-day forecast (40 entries × 3-hour intervals), handles network timeouts, and converts CSV fallback data to OpenWeatherMap JSON format for seamless integration
+**api.py** - Fetches 5-day forecast (40 entries); handles network timeouts; CSV fallback for offline capability
 
-**extract.py** - Transforms JSON to DataFrame with 18 computed columns; calculates heat index when temp≥27°C & humidity≥40%, wind chill when temp≤10°C & wind≥4.8 km/h, and dew point using Magnus approximation; normalizes units and extracts time labels
+**extract.py** - JSON to DataFrame conversion; computes heat index (temp≥27°C & humidity≥40%), wind chill (temp≤10°C & wind≥4.8 km/h), dew point; normalizes units (m/s→km/h)
 
-**dashboard.py** - Creates 6 subplots: temperature (with min-max shading), humidity (with dew point overlay), pressure (annotated min/max), wind (compass rose + Beaufort scale), precipitation (0-100% PoP), and cloud coverage; implements GitHub dark theme with custom color palette
+**dashboard.py** - 6 matplotlib subplots: temperature, humidity, pressure, wind, precipitation, cloud coverage; GitHub dark theme with custom colors
 
-**main.py** - Argparse for city input; ANSI color formatting; wind direction mapping (0-360° to compass points); Beaufort classification (Calm→Hurricane); formatted terminal output with visual progress bars and styled separators
+**main.py** - CLI with argparse; ANSI color formatting; wind direction & Beaufort scale; formatted terminal output with visual elements
 
 ---
 
-
 ## **EXECUTION FLOW**
 
-1. User inputs city: `python main.py --city "London"`
-2. API fetches data (or loads CSV fallback)
-3. Extract transforms JSON → enriched DataFrame
-4. Main displays colored terminal summary statistics
-5. Dashboard generates 6-panel matplotlib visualization
-6. Output: Complete 5-day weather intelligence report
+1. User: `python main.py --city "London"`
+2. API fetches data or loads CSV fallback
+3. Extract transforms JSON → DataFrame
+4. Main displays colored summary
+5. Dashboard generates 6-panel visualization
 
+---
 
 ## **KEY TECHNICAL FEATURES**
 
-- **Error Resilience**: API failures → automatic CSV fallback with no service interruption
-- **Scientific Accuracy**: ISO-compliant meteorological formulas for thermal & wind indices
-- **Data Richness**: 18 output columns from single API call (original + computed fields)
-- **Visual Excellence**: Dark theme, gradient colormaps, coordinated multi-panel layouts
-- **Professional UI**: Color-coded terminal with ASCII bars, Unicode symbols, formatted tables
+- **Error Resilience**: API failures → CSV fallback
+- **Scientific Accuracy**: ISO-compliant meteorological formulas
+- **Data Richness**: 18 computed columns from single API call
+- **Visual Excellence**: Dark theme with gradient colormaps
+- **Professional UI**: Color-coded terminal with ASCII bars
