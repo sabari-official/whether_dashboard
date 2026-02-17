@@ -1,8 +1,3 @@
-"""
-extract.py — Parse raw OpenWeatherMap JSON into a clean pandas DataFrame.
-Adds computed columns: heat_index, wind_chill, dew_point, uv_approx, day_label.
-"""
-
 import math
 import pandas as pd
 from typing import Tuple, Optional, Dict
@@ -12,7 +7,6 @@ from typing import Tuple, Optional, Dict
 # HELPERS
 # ─────────────────────────────────────────────────────────────────────────────
 def _heat_index(temp_c: float, rh: float) -> float:
-    """Steadman heat index (°C). Valid when temp ≥ 27 °C and rh ≥ 40 %."""
     t = temp_c * 9 / 5 + 32  # °F
     hi = (
         -42.379
@@ -29,7 +23,6 @@ def _heat_index(temp_c: float, rh: float) -> float:
 
 
 def _wind_chill(temp_c: float, wind_kmh: float) -> float:
-    """Wind chill index (°C). Valid when temp ≤ 10 °C and wind ≥ 4.8 km/h."""
     return (
         13.12
         + 0.6215 * temp_c
@@ -39,7 +32,6 @@ def _wind_chill(temp_c: float, wind_kmh: float) -> float:
 
 
 def _dew_point(temp_c: float, rh: float) -> float:
-    """Magnus formula dew-point (°C)."""
     a, b = 17.27, 237.7
     gamma = (a * temp_c / (b + temp_c)) + math.log(rh / 100.0)
     return (b * gamma) / (a - gamma)
@@ -152,7 +144,6 @@ def extract_data(data: Dict) -> Tuple[pd.DataFrame, str]:
 # SUMMARY STATS (used by terminal report + dashboard)
 # ─────────────────────────────────────────────────────────────────────────────
 def compute_summary(df: pd.DataFrame) -> Dict:
-    """Return a compact stats dict for display in terminal / dashboard."""
     if df.empty:
         return {}
 

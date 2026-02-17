@@ -1,10 +1,3 @@
-"""
-dashboard.py — Stunning real-time weather dashboard.
-Grid: 3 rows × 3 cols = 9 panels (temperature, humidity, pressure,
-wind, precipitation, feels-like vs dew-point, wind-rose, cloud cover,
-correlation heatmap).
-"""
-
 import math
 import numpy as np
 import matplotlib
@@ -62,7 +55,6 @@ def _style_ax(ax, title: str, ylabel: str = "", xlabel: bool = True):
 
 
 def _x_ticks(ax, df, step: int = 4):
-    """Show every `step`-th datetime label to avoid clutter."""
     ticks = df.index[::step]
     labels = df["datetime_str"].iloc[::step]
     ax.set_xticks(ticks)
@@ -174,7 +166,6 @@ def _cloud_panel(ax, df):
 
 
 def _wind_rose(ax, df):
-    """Polar wind-rose showing frequency × average speed per direction bin."""
     dirs = df["wind_deg"].values
     speeds = df["wind_speed"].values
     bins = 16
@@ -236,7 +227,7 @@ def _heatmap_panel(ax, df):
 # SUMMARY HEADER
 # ─────────────────────────────────────────────────────────────────────────────
 def _draw_summary_bar(fig, df, city: str, summary: Dict):
-    """Draw a top status bar with key stats."""
+    
     stats = [
         ("🌡", f"{summary.get('temp_avg','—')} °C", "Avg Temp"),
         ("⬆", f"{summary.get('temp_max','—')} °C", "Max Temp"),
@@ -263,10 +254,7 @@ def _draw_summary_bar(fig, df, city: str, summary: Dict):
 # MAIN ENTRY POINT
 # ─────────────────────────────────────────────────────────────────────────────
 def dashboard_plot(df, city: str, summary: Optional[Dict] = None, save_path: Optional[str] = None):
-    """
-    Render the 9-panel weather dashboard.
-    Pass save_path (e.g. 'dashboard.png') to save without showing.
-    """
+    
     if df.empty:
         print("  ✖  No data to plot.")
         return

@@ -1,10 +1,3 @@
-"""
-main.py — Entry point for Task 1: API Integration & Data Visualization.
-
-Run:  python main.py
-      python main.py --city London --save dashboard.png
-"""
-
 import sys
 import os
 import argparse
@@ -43,7 +36,7 @@ def _rule(char="─", width=70, color=GRAY):
 def _banner():
     print()
     _rule("═")
-    print(BOLD_W("  ⛅  OpenWeatherMap  ·  5-Day Forecast Dashboard  ·  Task 1"))
+    print(BOLD_W("  ⛅  OpenWeatherMap Dashboard"))
     _rule("═")
     print()
 

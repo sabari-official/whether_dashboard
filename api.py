@@ -1,8 +1,3 @@
-"""
-api.py — Fetch real-time weather data from OpenWeatherMap.
-Supports: Current weather + 5-day/3-hour forecast + local CSV fallback.
-"""
-
 import os
 import requests
 import pandas as pd
@@ -19,7 +14,6 @@ BASE_URL = "https://api.openweathermap.org/data/2.5"
 # LOCAL CSV FALLBACK
 # ─────────────────────────────────────────────────────────────────────────────
 def _load_local_csv_as_api(city: str) -> Optional[dict]:
-    """Search CWD for a CSV whose filename contains the city name."""
     cwd = os.getcwd()
     for fname in os.listdir(cwd):
         if (
@@ -98,11 +92,7 @@ def fetch_current_weather(city: str, api_key: str) -> Optional[dict]:
 # 5-DAY FORECAST
 # ─────────────────────────────────────────────────────────────────────────────
 def fetch_forecast(city: str) -> Optional[dict]:
-    """
-    Fetch 5-day / 3-hour forecast.
-    Falls back to local CSV when key is missing or the network fails.
-    Returns a dict compatible with extract.extract_data().
-    """
+   
     api_key = os.getenv("OPENWEATHER_API_KEY")
 
     if not api_key:
@@ -143,10 +133,7 @@ def fetch_forecast(city: str) -> Optional[dict]:
 # COMBINED FETCH (used by main.py)
 # ─────────────────────────────────────────────────────────────────────────────
 def fetch_all(city: str) -> Tuple[Optional[dict], Optional[dict]]:
-    """
-    Returns (forecast_data, current_data).
-    current_data may be None if key is missing or offline.
-    """
+
     api_key = os.getenv("OPENWEATHER_API_KEY")
     forecast = fetch_forecast(city)
     current = fetch_current_weather(city, api_key) if api_key else None
