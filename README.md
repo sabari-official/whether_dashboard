@@ -2,8 +2,6 @@
 
 ---
 
-## **INTERN CREDENTIALS**
-
 **Company**     : CODETECH IT SOLUTIONS
 
 **Name**        : SABARIVASAN E
