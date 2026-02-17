@@ -115,3 +115,9 @@ Task-1/
 - **Data Richness**: 18 computed columns from single API call
 - **Visual Excellence**: Dark theme with gradient colormaps
 - **Professional UI**: Color-coded terminal with ASCII bars
+
+##**OUTPUT**
+<img width="3202" height="1934" alt="Image" src="https://github.com/user-attachments/assets/2ef457f0-07a3-4481-a710-390f02c8024f" />
+
+##**Video**
+
