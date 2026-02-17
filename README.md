@@ -1,4 +1,6 @@
-# OpenWeatherMap Dashboard
+# Task - 1: API Integration and Data Visualization
+
+**OpenWeatherMap Dashboard**
 
 ---
 
